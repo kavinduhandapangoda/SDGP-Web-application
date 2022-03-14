@@ -110,11 +110,9 @@
     <!-- Map -->
     <div class="row">
             <div class="col-lg-11 col-sm-12 ms-lg-5 mt-3" style="height: 500px; background-color: #f8f9fa;">
-                <div id="map"></div>
-
-                <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-                
-                <script src="#" async></script>
+                <div style="width: 1225px; height: 500px;">
+                    {!! Mapper::render() !!}
+                </div>
             </div>
     </div>
 

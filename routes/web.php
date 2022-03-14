@@ -23,7 +23,7 @@ Route::get('/c', function () {
 
 Route::get('/ui01','Frontendcontroller@indexUI01');
 Route::get('/ui02','Frontendcontroller@indexUI02');
-Route::get('/map','Frontendcontroller@indexUI03');
+Route::get('/map','Frontendcontroller@map');
 Route::get('/ui04','Frontendcontroller@indexUI04');
 Route::get('/ui05','Frontendcontroller@indexUI05');
 
