@@ -7,17 +7,24 @@ use Mapper;
 
 class Frontendcontroller extends Controller
 {
-    public function indexUI01(){
-        return view('UI_Scan_Logs_view');
-    }
 
+    public function indexUI01(){
+        {
+            $scanlogs = ui_scan_logs_view::all();
+            return view('UI_Scan_Map_view', compact('student'));
+        }
+        // return view('UI_Scan_Map_view');
+    }
+    
     public function indexUI02(){
         return view('UI_Disease_Spread_view');
     }
 
+    
     public function indexUI03(){
         return view('UI_Scan_Map_view');
     }
+
 
     public function indexUI04(){
         return view('UI_Home');

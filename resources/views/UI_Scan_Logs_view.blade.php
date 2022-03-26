@@ -121,7 +121,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+            @foreach ($scanlogs as $item)
+                            <tr>
+                                <td>{{ $item->number  }}</td>
+                                <td>{{ $item->scanDate }}</td>
+                                <td>{{ $item->detectedDiseases }}</td>
+                                <td>{{ $item->detectedTrees }}</td>
+                                <td>{{ $item->options }}</td>
+                              
+                            </tr>
+                            @endforeach
+              <!-- <tr>
                 <th scope="row">1</th>
                 <td>2021-03-15</td>
                 <td>Coconut scale damage</td>
@@ -153,7 +163,7 @@
                     <i class="bi bi-file-earmark-text"></i>
                   </button>
                 </td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
 
