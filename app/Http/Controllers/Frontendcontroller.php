@@ -29,8 +29,10 @@ class Frontendcontroller extends Controller
 
     public function map()
     {
-        
-        $request = DB::table('scan_log')->select('scan_log.*')->get();
+        date_default_timezone_set("Asia/Colombo");
+        $date = date('Y-m-d');
+
+        $request = DB::table('scan_log')->select('scan_log.*')->where('created_at','LIKE', '%'.$date.'%')->get();
         $log_list = json_decode($request);
         $count = 0;
         foreach($log_list as $log){
@@ -46,6 +48,8 @@ class Frontendcontroller extends Controller
     }
 
     public function tableView(){
-        return view('tableView');
+
+        $request = DB::table('scan_log')->select('scan_log.*')->get();
+        return view('tableView',['rows'=>$request]);
     }
 }
