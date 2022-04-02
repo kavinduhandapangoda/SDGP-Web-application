@@ -26,8 +26,8 @@
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>Task</th>
-                      <th>Progress</th>
+                      <th>Detected Trees</th>
+                      <th>Scan Date</th>
                       <th> Option </th>
                     </tr>
                   </thead>
@@ -36,19 +36,13 @@
                     @foreach ($rows as $row)
                     <tr>
                         <td>{{$row->id}}</td>
-                        <td>Fix and squish bugs</td>
-                        <td>
-                          <div class="progress progress-xs progress-striped active">
-                            <div class="progress-bar bg-success" style="width: 90%"></div>
-                          </div>
-                        </td>
-                        <td> <button class="btn btn-success"> View Details </button> </td>
+                        <td>{{$row->trees}}</td>
+                        <td>{{$row->created_at}}</td>
+                        
+                        <td><a href="{{route('mapViewSelected', $row->created_at) }}"> <button class="btn btn-success"> View Details </button></a> </td>
                       </tr>
                     @endforeach
-
                     
-
-
                   </tbody>
                 </table>
               </div>

@@ -36,3 +36,7 @@ Route::get('/tableView','Frontendcontroller@tableView');
 Route::get('/d', function () {
     return 'welcome to dashboard!';
 });
+
+Route::get('/reportLog/{location}/{disease}','Frontendcontroller@reportLog');
+
+Route::get('/mapViewSelected/{data}','Frontendcontroller@tableViewSelected')->name('mapViewSelected');
