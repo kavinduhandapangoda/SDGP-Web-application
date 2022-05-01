@@ -12,31 +12,13 @@ use App\Http\Controllers\Frontendcontroller;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/web development', function () {
-    return view('welcome');
-});
-
 Route::get('/', function () {
     return view('dashboard');
 });
 
-// Route::get('/UI', function () {
-//     return view('UI_Scan_Logs_view');
-// });
-
-Route::get('/ui01','Frontendcontroller@indexUI01');
-Route::get('/ui02','Frontendcontroller@indexUI02');
+Route::get('/report','Frontendcontroller@reportView');
 Route::get('/map','Frontendcontroller@map');
-Route::get('/ui04','Frontendcontroller@indexUI04');
-Route::get('/ui05','Frontendcontroller@indexUI05');
-
 Route::get('/tableView','Frontendcontroller@tableView');
-
-Route::get('/d', function () {
-    return 'welcome to dashboard!';
-});
-
 Route::get('/reportLog/{location}/{disease}','Frontendcontroller@reportLog');
-
 Route::get('/mapViewSelected/{data}','Frontendcontroller@tableViewSelected')->name('mapViewSelected');
+Route::get('/reportViewSelected/{data}','Frontendcontroller@reportViewSelected')->name('reportViewSelected');
