@@ -13,7 +13,6 @@ use App\Http\Controllers\Frontendcontroller;
 |
 */
 
-=======
 Route::get('/web development', function () {
     return view('welcome');
 });
