@@ -13,7 +13,7 @@ class Frontendcontroller extends Controller
 
         $request = DB::table('scan_log')->select('scan_log.*')->orderBy("created_at")->get();
         $data = json_decode($request);
-        
+        $month_array = array();
 
         foreach($data as $row){
             $date = new \DateTime($row->created_at);
@@ -44,6 +44,7 @@ class Frontendcontroller extends Controller
             $count = $count + 1;
         }
 
+        $solution_array = array();
         $requestSolutionData = DB::table('disease')->select('disease.*')->get();
         $solutionData = json_decode($requestSolutionData);
         foreach($solutionData as $disease){
@@ -75,7 +76,8 @@ class Frontendcontroller extends Controller
             }
             $count = $count + 1;
         }
-
+        
+        $solution_array = array();
         $requestSolutionData = DB::table('disease')->select('disease.*')->get();
         $solutionData = json_decode($requestSolutionData);
         foreach($solutionData as $disease){
