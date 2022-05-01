@@ -45,6 +45,7 @@ class Frontendcontroller extends Controller
         }
 
         $solution_array = array();
+
         $requestSolutionData = DB::table('disease')->select('disease.*')->get();
         $solutionData = json_decode($requestSolutionData);
         foreach($solutionData as $disease){
@@ -76,7 +77,7 @@ class Frontendcontroller extends Controller
             }
             $count = $count + 1;
         }
-        
+
         $solution_array = array();
         $requestSolutionData = DB::table('disease')->select('disease.*')->get();
         $solutionData = json_decode($requestSolutionData);
@@ -103,6 +104,7 @@ class Frontendcontroller extends Controller
 
         $count = 0;
         $treeCount = 0;
+        $solution_array = array();
 
         foreach($solutionData as $disease){
             $solution_array[ $disease->name ] = $disease->solution;
