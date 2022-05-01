@@ -87,7 +87,7 @@ class Frontendcontroller extends Controller
             );
 
         }else{
-            DB::table('scan')->increment('trees', 1, ['created_at' => $date]);
+            DB::table('scan')->where('created_at', $date)->increment('trees', 1);
         }
 
         $request = DB::table('scan_log')->insert(
