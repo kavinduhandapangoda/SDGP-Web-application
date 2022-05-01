@@ -4,20 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mapper;
+use DB;
 
 class Frontendcontroller extends Controller
 {
-    public function indexUI01(){
-        return view('UI_Scan_Logs_view');
-    }
-
+    
     public function indexUI02(){
         return view('UI_Disease_Spread_view');
     }
 
+    
     public function indexUI03(){
         return view('UI_Scan_Map_view');
     }
+
 
     public function indexUI04(){
         return view('UI_Home');
@@ -29,8 +29,72 @@ class Frontendcontroller extends Controller
 
     public function map()
     {
-        Mapper::map(6.708093793834191, 80.04245852869457); 
-        Mapper::marker(6.707762645738229, 80.04189149920458, ['animation' => 'DROP']);   
-        return view('UI_Scan_Map_view');
+        date_default_timezone_set("Asia/Colombo");
+        $date = date('Y-m-d');
+
+        $request = DB::table('scan_log')->select('scan_log.*')->where('created_at','LIKE', '%'.$date.'%')->get();
+        $log_list = json_decode($request);
+        $count = 0;
+        foreach($log_list as $log){
+            $locationList = explode(",",$log->location);
+            if($count == 0){
+                Mapper::map($locationList[0], $locationList[1]); 
+            }else{
+                Mapper::marker($locationList[0], $locationList[1], ['animation' => 'DROP']);
+            }
+            $count = $count + 1;
+        }
+        return view('mapView',['data'=>$request]);
+    }
+
+    public function tableView(){
+
+        $request = DB::table('scan')->select('scan.*')->get();
+        return view('tableView',['rows'=>$request]);
+
+    }
+
+    public function tableViewSelected($date){
+
+        $request = DB::table('scan_log')->select('scan_log.*')->where('created_at','LIKE', '%'.$date.'%')->get();
+
+        $log_list = json_decode($request);
+        $count = 0;
+        foreach($log_list as $log){
+            $locationList = explode(",",$log->location);
+            if($count == 0){
+                Mapper::map($locationList[0], $locationList[1]); 
+            }else{
+                Mapper::marker($locationList[0], $locationList[1], ['animation' => 'DROP']);
+            }
+            $count = $count + 1;
+        }
+        return view('mapView',['data'=>$request]);
+
+    }
+
+    public function reportLog($location,$disease){
+
+        date_default_timezone_set("Asia/Colombo");
+        $date = date('Y-m-d');
+
+        $request = DB::table('scan')->select('scan.*')->where('created_at','LIKE', '%'.$date.'%')->count();
+
+        if($request == 0){
+
+            $request = DB::table('scan')->insert(
+                ['trees'=> "0" , 'created_at'=>$date]
+            );
+
+        }else{
+            DB::table('scan')->increment('trees', 1, ['created_at' => $date]);
+        }
+
+        $request = DB::table('scan_log')->insert(
+            ['location'=>$location, 'disease' =>$disease, 'farm' => 'farm1', 'created_at'=>$date]
+        );
+
+        return $request;
+        
     }
 }
