@@ -64,6 +64,10 @@
                     @endforeach
                   </tbody>
                 </table>
+                <br>
+                <div style="width: 100%; height: 600px;">
+                  {!! Mapper::render() !!}
+                </div>
               </div>
               <!-- /.card-body -->
             </div>

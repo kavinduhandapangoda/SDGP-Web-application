@@ -9,7 +9,7 @@ use DateTime;
 
 class Frontendcontroller extends Controller
 {
-        public function reportView(){
+    public function reportView(){
 
         $request = DB::table('scan_log')->select('scan_log.*')->orderBy("created_at")->get();
         $data = json_decode($request);
@@ -106,13 +106,21 @@ class Frontendcontroller extends Controller
         $treeCount = 0;
         $solution_array = array();
 
+        foreach($log_list as $log){
+            $locationList = explode(",",$log->location);
+            if($count == 0){
+                Mapper::map($locationList[0], $locationList[1]); 
+            }else{
+                Mapper::marker($locationList[0], $locationList[1], ['animation' => 'DROP']);
+            }
+            $count = $count + 1;
+        }
+
         foreach($solutionData as $disease){
             $solution_array[ $disease->name ] = $disease->solution;
         }
-
-       // return $solution_array;
     
-
+        $count = 0;
         foreach($scan_list as $scan){
             $count = $count + 1;
             $treeCount = $treeCount + $scan->trees;
@@ -151,4 +159,10 @@ class Frontendcontroller extends Controller
         return $request;
         
     }
+
+    public function detailsScan(){
+        $request = DB::table('disease')->select('disease.*')->get();
+        return $request;
+    }
+    
 }

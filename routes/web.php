@@ -22,3 +22,4 @@ Route::get('/tableView','Frontendcontroller@tableView');
 Route::get('/reportLog/{location}/{disease}','Frontendcontroller@reportLog');
 Route::get('/mapViewSelected/{data}','Frontendcontroller@tableViewSelected')->name('mapViewSelected');
 Route::get('/reportViewSelected/{data}','Frontendcontroller@reportViewSelected')->name('reportViewSelected');
+Route::get('/Diseasedata','Frontendcontroller@detailsScan');

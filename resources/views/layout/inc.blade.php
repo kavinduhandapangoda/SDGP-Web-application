@@ -67,7 +67,7 @@
             <a href="/map" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                 View Map
+                 View live Map
               </p>
             </a>
           </li>
